@@ -1,5 +1,5 @@
 from jupyterhub.handlers.pages import BaseHandler
-from docker import Client
+from docker import DockerClient
 from tornado import gen
 
 

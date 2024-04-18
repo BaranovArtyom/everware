@@ -12,5 +12,8 @@
   "bower": "*",
   "less": "~2",
   "less-plugin-clean-css": "*"
+ },
+ "dependencies": {
+  "configurable-http-proxy": "^4.6.1"
  }
 }

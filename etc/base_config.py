@@ -17,7 +17,7 @@ c.Spawner.use_docker_client_env = True
 # give users an opportunity to restore any images via docker or not. Default: True
 # c.Spawner.share_user_images = False
 
-# c.Authenticator.admin_users = {'anaderi', 'astiunov'}
+c.Authenticator.admin_users = {'arty', 'alice'}
 
 # The docker containers need access to the Hub API, so the default
 # loopback address doesn't work

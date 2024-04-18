@@ -1,3 +1,4 @@
+from docker import APIClient
 from tempfile import mkdtemp
 from datetime import timedelta
 from os.path import join as pjoin
@@ -494,6 +495,7 @@ class CustomDockerSpawner(GitMixin, EmailNotificator, ContainerHandler):
 
     @gen.coroutine
     def poll(self):
+        # First, check if the container exists
         container = yield self.get_container()
         if not container:
             return ''
@@ -505,21 +507,29 @@ class CustomDockerSpawner(GitMixin, EmailNotificator, ContainerHandler):
             pformat(container_state),
         )
 
+        # Check if the container is running
         if container_state["Running"]:
-            # check if something is listening inside container
-            try:
-                # self.log.info('poll {}'.format(self.user.server.url))
-                yield wait_for_http_server(self.user.server.url, timeout=1)
-            except TimeoutError:
-                self.log.warn("Can't reach running container by http")
-                return ''
-            return None
+            # Before accessing the user server, check if it's initialized
+            if self.user.server and self.user.server.url:
+                # Check if something is listening inside container
+                try:
+                    self.log.info('poll {}'.format(self.user.server.url))
+                    yield wait_for_http_server(self.user.server.url, timeout=1)
+                except TimeoutError:
+                    self.log.warn("Can't reach running container by http")
+                    return ''
+                return None
+            else:
+                # Log or handle the case where server or URL is not set
+                self.log.error("User server or URL not initialized.")
+                return 'Server or URL not initialized'
         else:
             return (
                 "ExitCode={ExitCode}, "
                 "Error='{Error}', "
                 "FinishedAt={FinishedAt}".format(**container_state)
             )
+
 
     @gen.coroutine
     def is_running(self):

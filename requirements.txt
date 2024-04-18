@@ -2,9 +2,11 @@ ipython[notebook]
 coveralls
 nose2
 pyyaml
-pytest>=2.8
-GitPython==2.1.1
-selenium==2.52.0
-jupyterhub==0.7.2
+pytest
+GitPython
+selenium
+jupyterhub
 docker-py==1.10.6
+docker==2.7.0
 -e git+https://github.com/jupyter/dockerspawner.git@fdf5577ca2b4087a064507cca8b250e4ad792e02#egg=dockerspawner
+gitdb2

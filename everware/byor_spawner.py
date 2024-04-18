@@ -55,7 +55,7 @@ class ByorDockerSpawner(CustomDockerSpawner):
         try:
             # version='auto' causes a connection to the daemon.
             # That's why the method must be a coroutine.
-            self._byor_client = docker.Client('{}:{}'.format(byor_ip, byor_port),
+            self._byor_client = docker.DockerClient('{}:{}'.format(byor_ip, byor_port),
                                               version='auto',
                                               timeout=self.byor_timeout)
         except DockerException as e:
