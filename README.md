@@ -43,7 +43,7 @@ In order to deploy your own `everware` instance, you have to:
  - install `nodejs` and `npm` (platform-specific)
  - create and activate a `conda` environment with python 3.5(or 3.6.0)
 ```
-    conda create -n everware python=3.5
+    conda create -n everware python=3.7
     source activate everware
 ```
  - Clone this repo and install `everware`
