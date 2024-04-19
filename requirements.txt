@@ -1,4 +1,4 @@
-ipython[notebook]
+notebook==6.5.6
 coveralls
 nose2
 pyyaml
