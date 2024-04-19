@@ -30,3 +30,4 @@ src/*
 .idea/*
 .vscode/*
 env.docker-local
+env.docker-remote
